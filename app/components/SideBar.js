@@ -1,8 +1,11 @@
 import React from 'react'
+import Block from './Block'
 
 const SideBar = () => {
   return (
-    <div className='bg-red-400 w-full h-screen'>SideBar</div>
+    <div className='bg-red-400 w-full h-screen'>
+      <Block/>
+    </div>
   )
 }
 
