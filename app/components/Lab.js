@@ -1,6 +1,6 @@
 import React from "react";
 
-const Lab = ({studentList, blockName, weekName}) => {
+const Lab = ({ studentList, labName }) => {
   const gradingArea = [
     "Drug Selected",
     "Patient Profile",
@@ -10,19 +10,12 @@ const Lab = ({studentList, blockName, weekName}) => {
     "Repeats",
     "Days supply",
   ];
-  const studentList = [
-    "Ahmad Heshmati",
-    "Syed Jawad Raza",
-    "Qiaomu Lei",
-    "John Dao",
-    "Yuta Bokuchi",
-  ];
   return (
     <div>
       <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <div className="flex flex-col items-center">
           <label className=" text-gray-700 text-4xl font-bold self-center ">
-            Lab 1
+            {labName}
           </label>
         </div>
 
@@ -33,12 +26,13 @@ const Lab = ({studentList, blockName, weekName}) => {
           >
             Student Name
           </label>
-          <select id="name" className=" bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+          <select
+            id="name"
+            className=" bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          >
             <option disabled>Select the student</option>
             {studentList.map((student) => (
-              <option value={student}>
-                {student}
-              </option>
+              <option value={student}>{student}</option>
             ))}
           </select>
         </div>
@@ -79,7 +73,7 @@ const Lab = ({studentList, blockName, weekName}) => {
               <label className=" text-white text-lg font-bold mb-2">
                 {criterion}
               </label>
-              <select 
+              <select
                 id={criterion}
                 className=" bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               >

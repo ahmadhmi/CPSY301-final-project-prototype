@@ -3,37 +3,27 @@ import React from "react";
 import { useState } from "react";
 import LabItem from "./LabItem";
 
-const Week = ({ onGradeLab }) => {
-  const weeks = ["Week-1", "Week-2", "Week-3", "Week-4", "Week-5", "Week-6"];
+const Week = ({onGradeLab, listOfWeeks, onDelete}) => {
   const [selectedWeek, setSelectedWeek] = useState("");
-  const [labs, setLabs] = useState([
-    "Lab-1",
-    "Lab-2",
-    "Lab-3",
-    "Lab-4",
-    "Lab-5",
-    "Lab-6",
-  ]);
-  const onDelete = (labName) => {
-    setLabs(labs.filter((lab) => lab !== labName));
-  };
+  
+  
   return (
-    <div className="w-full bg-black p-10">
+    <div className="w-full p-10">
       <ul>
-        {weeks.map((week, index) => (
+        {listOfWeeks.map((weekObject, index) => (
           <li
             key={index}
             className="text-white text-lg font-bold mb-2"
-            onClick={() => setSelectedWeek(week)}
+            onClick={() => setSelectedWeek(weekObject.weekName)}
           >
-            {week}
-            {selectedWeek === week && (
+            {weekObject.weekName}
+            {selectedWeek === weekObject.weekName && (
               <ul>
-                {labs.map((lab) => (
+                {weekObject.labs.map((lab) => (
                   <LabItem
                     labName={lab}
-                    onDelete={onDelete}
-                    onGradeLab={onGradeLab}
+                    onDelete={() => onDelete(weekObject.weekName, lab)}
+                    onGradeLab={() => onGradeLab(weekObject.weekName, lab)}
                   />
                 ))}
               </ul>

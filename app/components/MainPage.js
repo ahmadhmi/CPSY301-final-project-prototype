@@ -1,10 +1,12 @@
+"use client"
 import React from "react";
 import Week from "./Week";
 
-const MainPage = ({ onGradeLab }) => {
+
+const MainPage = ({onGradeLab, listOfWeeks, onDelete}) => {
   return (
-    <div className="bg-green-600 w-full h-screen">
-      <Week onGradeLab={onGradeLab} />
+    <div className="bg-black w-full">
+      <Week onGradeLab={onGradeLab} listOfWeeks={listOfWeeks} onDelete={onDelete} />
     </div>
   );
 };
