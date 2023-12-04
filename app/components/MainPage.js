@@ -1,12 +1,12 @@
-import React from 'react'
-import Lab from './Lab'
+import React from "react";
+import Week from "./Week";
 
-const MainPage = () => {
+const MainPage = ({ onGradeLab }) => {
   return (
-    <div className='bg-green-600 w-full h-screen'>
-        <Lab/>
+    <div className="bg-green-600 w-full h-screen">
+      <Week onGradeLab={onGradeLab} />
     </div>
-  )
-}
+  );
+};
 
-export default MainPage
+export default MainPage;

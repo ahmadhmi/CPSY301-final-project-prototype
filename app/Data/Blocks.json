@@ -1,0 +1,61 @@
+[
+  {
+    "Name": "Block A",
+    "Weeks": [
+      {
+        "Name": "Week-1",
+        "Labs": [
+          {
+            "Name": "Lab-1",
+            "Criteria": [
+              "Rx#",
+              "Drug Name",
+              "Drug Strength",
+              "Drug Form",
+              "Drug Quantity",
+              "Drug Directions",
+              "Drug Refills",
+              "Drug Notes",
+              "Drug Sig"
+            ]
+          },
+          {
+            "Name": "Lab-2",
+            "Criteria": [
+              "Rx#",
+              "Drug Name",
+              "Drug Strength",
+              "Drug Form",
+              "Drug Quantity",
+              "Drug Directions",
+              "Drug Refills",
+              "Drug Notes",
+              "Drug Sig"
+            ]
+          },
+          {
+            "Name": "Lab-3",
+            "Criteria": [
+              "Rx#",
+              "Drug Name",
+              "Drug Strength",
+              "Drug Form",
+              "Drug Quantity",
+              "Drug Directions",
+              "Drug Refills",
+              "Drug Notes",
+              "Drug Sig"
+            ]
+          }
+        ]
+      }
+    ],
+    "Students": [
+      "Ahmad Heshmati",
+      "Syed Jawad Raza",
+      "Qiaomu Lei",
+      "John Dao",
+      "Yuta Kakuchi"
+    ]
+  }
+]

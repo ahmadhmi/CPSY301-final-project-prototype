@@ -1,6 +1,6 @@
 import React from "react";
 
-const Lab = () => {
+const Lab = ({studentList, blockName, weekName}) => {
   const gradingArea = [
     "Drug Selected",
     "Patient Profile",
@@ -79,11 +79,11 @@ const Lab = () => {
               <label className=" text-white text-lg font-bold mb-2">
                 {criterion}
               </label>
-              <select
+              <select 
                 id={criterion}
                 className=" bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               >
-                <option value="pass" disabled>
+                <option value="" disabled selected>
                   Select the grade
                 </option>
                 <option value="pass">Pass</option>
