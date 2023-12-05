@@ -24,7 +24,6 @@ const Lab = ({ studentList, labName, blockName }) => {
     setStudentForGrade(
       studentForGrade.filter((student) => student !== formResult.name)
     );
-    console.log(labResult);
     reset();
   };
 
@@ -49,7 +48,7 @@ const Lab = ({ studentList, labName, blockName }) => {
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            for="name"
+            htmlFor="name"
           >
             Student Name
           </label>
@@ -70,7 +69,7 @@ const Lab = ({ studentList, labName, blockName }) => {
         <div className="mb-6">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            for="Rx#"
+            htmlFor="Rx#"
           >
             Rx#
           </label>
@@ -86,7 +85,7 @@ const Lab = ({ studentList, labName, blockName }) => {
         <div className="mb-6">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            for="DrugName"
+            htmlFor="DrugName"
           >
             Drug Name
           </label>
@@ -179,8 +178,8 @@ const Lab = ({ studentList, labName, blockName }) => {
                 </tr>
               </thead>
               <tbody className="text-gray-700">
-                {labResult.map((grade) => (
-                  <tr>
+                {labResult.map((grade, index) => (
+                  <tr key={index}>
                     <td className="border px-4 py-2">{grade["name"]}</td>
                     <td className="border px-4 py-2">{grade["Rx#"]}</td>
                     <td className="border px-4 py-2">{grade["DrugName"]}</td>

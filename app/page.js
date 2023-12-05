@@ -5,7 +5,7 @@ import MainPage from "./components/MainPage";
 import { useState } from "react";
 import Lab from "./components/Lab";
 import { useUserAuth } from "./_utils/auth-context";
-import blockData from "./Data/blocks";
+import blockData from "./Data/blocks.json";
 
 export default function Home() {
   const { user, gitHubSignIn } = useUserAuth();

@@ -15,6 +15,7 @@ const SideBar = ({ handleBlockClick, listOfBlocks }) => {
     <div className="bg-black w-full h-screen p-3 flex flex-col gap-4 border-r-2 ">
       {listOfBlocks.map((block) => (
         <Block
+          key={block}
           blockName={block}
           handleBlockClick={() => handleBlockClick(block)}
         />
