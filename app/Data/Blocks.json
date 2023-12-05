@@ -1,61 +1,62 @@
 [
   {
-    "Name": "Block A",
-    "Weeks": [
-      {
-        "Name": "Week-1",
-        "Labs": [
-          {
-            "Name": "Lab-1",
-            "Criteria": [
-              "Rx#",
-              "Drug Name",
-              "Drug Strength",
-              "Drug Form",
-              "Drug Quantity",
-              "Drug Directions",
-              "Drug Refills",
-              "Drug Notes",
-              "Drug Sig"
-            ]
-          },
-          {
-            "Name": "Lab-2",
-            "Criteria": [
-              "Rx#",
-              "Drug Name",
-              "Drug Strength",
-              "Drug Form",
-              "Drug Quantity",
-              "Drug Directions",
-              "Drug Refills",
-              "Drug Notes",
-              "Drug Sig"
-            ]
-          },
-          {
-            "Name": "Lab-3",
-            "Criteria": [
-              "Rx#",
-              "Drug Name",
-              "Drug Strength",
-              "Drug Form",
-              "Drug Quantity",
-              "Drug Directions",
-              "Drug Refills",
-              "Drug Notes",
-              "Drug Sig"
-            ]
-          }
-        ]
-      }
+    "blockName": "Block-1",
+    "listOfWeeks": [
+      { "weekName": "Week-1", "labs": ["lab 1", "lab 2", "lab 7"] },
+      { "weekName": "Week-2", "labs": ["lab 3", "lab 4", "lab 8"] },
+      { "weekName": "Week-3", "labs": ["lab 5", "lab 6", "lab 9"] }
     ],
-    "Students": [
-      "Ahmad Heshmati",
-      "Syed Jawad Raza",
-      "Qiaomu Lei",
-      "John Dao",
-      "Yuta Kakuchi"
+    "students": [
+      "Alice Johnson",
+      "Bob Smith",
+      "Carol Martinez",
+      "Dave Lee",
+      "Emma Davis"
+    ]
+  },
+  {
+    "blockName": "Block-2",
+    "listOfWeeks": [
+      { "weekName": "Week-1", "labs": ["lab 1", "lab 2", "lab 7"] },
+      { "weekName": "Week-2", "labs": ["lab 3", "lab 4", "lab 8"] },
+      { "weekName": "Week-3", "labs": ["lab 5", "lab 6", "lab 9"] }
+    ],
+    "students": [
+      "Frank Green",
+      "Grace Harris",
+      "Henry Clark",
+      "Isabel Young",
+      "Jack Allen"
+    ]
+  },
+  {
+    "blockName": "Block-3",
+    "listOfWeeks": [
+      { "weekName": "Week-5", "labs": ["lab 1", "lab 2", "lab 7"] },
+      { "weekName": "Week-6", "labs": ["lab 3", "lab 4", "lab 8"] },
+      { "weekName": "Week-7", "labs": ["lab 5", "lab 6", "lab 9"] }
+    ],
+    "students": [
+      "Kimberly Scott",
+      "Liam Wright",
+      "Mia Turner",
+      "Noah White",
+      "Olivia King"
+    ]
+  },
+  {
+    "blockName": "Block-4",
+    "listOfWeeks": [
+      { "weekName": "Week-8", "labs": ["lab 10", "lab 11", "lab 12"] },
+      { "weekName": "Week-9", "labs": ["lab 13", "lab 14", "lab 15"] },
+      { "weekName": "Week-10", "labs": ["lab 16", "lab 17", "lab 18"] }
+    ],
+    "students": [
+      "Peter Brown",
+      "Quinn Adams",
+      "Rachel Wilson",
+      "Steve Moore",
+      "Tina Thompson"
     ]
   }
 ]

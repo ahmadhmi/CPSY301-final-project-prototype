@@ -1,8 +1,7 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
-const Lab = ({ studentList, labName }) => {
+const Lab = ({ studentList, labName, blockName }) => {
   const [studentForGrade, setStudentForGrade] = useState(studentList);
   const gradingArea = [
     "drugSelected",
@@ -14,36 +13,19 @@ const Lab = ({ studentList, labName }) => {
     "daysSupply",
   ];
 
-  const grade = {
-    drugSelected: "",
-    patientProfile: "",
-    prescriber: "",
-    sig: "",
-    dispenseQuantity: "",
-    repeats: "",
-    daysSupply: "",
-  };
+  const { register, handleSubmit, reset } = useForm();
 
-  const { register, handleSubmit } = useForm();
-
-  const [studentName, setStudentName] = useState(studentForGrade[0]);
-  const [rx, setRx] = useState("");
-  const [drugName, setDrugName] = useState("");
-  const [grades, setGrades] = useState(grade);
   const [labResult, setLabResult] = useState([]);
   const [showResult, setShowResult] = useState(false);
 
   const handFormSubmit = (Data) => {
-    const grade = Data;
-    console.log(grade);
-    setLabResult((previousLabResult) => [...previousLabResult, grade]);
+    const formResult = Data;
+    setLabResult((previousLabResult) => [...previousLabResult, formResult]);
     setStudentForGrade(
-      studentForGrade.filter((student) => student !== studentName)
+      studentForGrade.filter((student) => student !== formResult.name)
     );
-    setStudentName(studentForGrade[0]);
-    setRx("");
-    setDrugName("");
-    setGrades(grade);
+    console.log(labResult);
+    reset();
   };
 
   const handleShowResult = () => {
@@ -55,7 +37,10 @@ const Lab = ({ studentList, labName }) => {
         onSubmit={handleSubmit(handFormSubmit)}
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
       >
-        <div className="flex flex-col items-center">
+        <div className="flex flex-row gap-3 justify-center">
+          <label className=" text-gray-700 text-4xl font-bold self-center ">
+            {blockName}
+          </label>
           <label className=" text-gray-700 text-4xl font-bold self-center ">
             {labName}
           </label>
@@ -129,53 +114,93 @@ const Lab = ({ studentList, labName }) => {
                 {...register(criterion)}
                 required
               >
-                <option value="" disabled selected>
-                  Select the grade
+                <option value="pass" selected>
+                  Pass
                 </option>
-                <option value="pass">Pass</option>
                 <option value="fail">Fail</option>
               </select>
             </div>
           ))}
         </div>
         <div className="flex items-center justify-between">
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Submit
-          </button>
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="button"
-            href="#"
-            onClick={handleShowResult}
-            disabled={studentForGrade.length > 0}
-          >
-            Print Results
-          </button>
+          {studentForGrade.length > 0 && (
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit"
+            >
+              Submit
+            </button>
+          )}
+          {studentForGrade.length == 0 && (
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="button"
+              href="#"
+              onClick={handleShowResult}
+            >
+              Print Results
+            </button>
+          )}
         </div>
       </form>
       {showResult && (
-        <div className="flex flex-col items-center">
-          <label className=" text-gray-700 text-4xl font-bold self-center ">
+        <div className="flex flex-col items-center mt-20">
+          <label className=" text-gray-700 text-4xl font-bold self-center mb-10">
             Lab Results
           </label>
           <div>
-            {labResult.map((grade) => (
-              <div className="flex flex-row gap-2 items-center text-slate-950">
-                <div className="w-1/6">{grade.studentName}</div>
-                <div className="w-1/6">{rx}</div>
-                <div className="w-1/6">{drugName}</div>
-                <div className="w-1/6">{grades.drugSelected}</div>
-                <div className="w-1/6">{grades.patientProfile}</div>
-                <div className="w-1/6">{grades.prescriber}</div>
-                <div className="w-1/6">{grades.sig}</div>
-                <div className="w-1/6">{grades.dispenseQuantity}</div>
-                <div className="w-1/6">{grades.repeats}</div>
-                <div className="w-1/6">{grades.daysSupply}</div>
-              </div>
-            ))}
+            <table className="min-w-full table-auto bg-white shadow-md rounded-lg overflow-hidden">
+              <thead className="bg-gray-200 text-gray-600">
+                <tr>
+                  <th className="px-4 py-2 font-semibold text-left">
+                    Student Name
+                  </th>
+                  <th className="px-4 py-2 font-semibold text-left">Rx#</th>
+                  <th className="px-4 py-2 font-semibold text-left">
+                    Drug Name
+                  </th>
+                  <th className="px-4 py-2 font-semibold text-left">
+                    Drug Selected
+                  </th>
+                  <th className="px-4 py-2 font-semibold text-left">
+                    Patient Profile
+                  </th>
+                  <th className="px-4 py-2 font-semibold text-left">
+                    Prescriber
+                  </th>
+                  <th className="px-4 py-2 font-semibold text-left">Sig</th>
+                  <th className="px-4 py-2 font-semibold text-left">
+                    Dispense Quantity
+                  </th>
+                  <th className="px-4 py-2 font-semibold text-left">Repeats</th>
+                  <th className="px-4 py-2 font-semibold text-left">
+                    Days Supply
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="text-gray-700">
+                {labResult.map((grade) => (
+                  <tr>
+                    <td className="border px-4 py-2">{grade["name"]}</td>
+                    <td className="border px-4 py-2">{grade["Rx#"]}</td>
+                    <td className="border px-4 py-2">{grade["DrugName"]}</td>
+                    <td className="border px-4 py-2">
+                      {grade["drugSelected"]}
+                    </td>
+                    <td className="border px-4 py-2">
+                      {grade["patientProfile"]}
+                    </td>
+                    <td className="border px-4 py-2">{grade["prescriber"]}</td>
+                    <td className="border px-4 py-2">{grade["sig"]}</td>
+                    <td className="border px-4 py-2">
+                      {grade["dispenseQuantity"]}
+                    </td>
+                    <td className="border px-4 py-2">{grade["repeats"]}</td>
+                    <td className="border px-4 py-2">{grade["daysSupply"]}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       )}

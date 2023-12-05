@@ -1,29 +1,27 @@
-"use client";
-import React from "react";
-import { useState } from "react";
-import LabItem from "./LabItem";
+import React, { useState } from 'react';
+import LabItem from './LabItem';
 
-const Week = ({onGradeLab, listOfWeeks, onDelete}) => {
-  const [selectedWeek, setSelectedWeek] = useState("");
-  
-  
+const Week = ({ onGradeLab, listOfWeeks, onDelete }) => {
+  const [selectedWeek, setSelectedWeek] = useState('');
+
   return (
-    <div className="w-full p-10">
+    <div className='w-full p-10'>
       <ul>
-        {listOfWeeks.map((weekObject, index) => (
+        {listOfWeeks.map((week, index) => (
           <li
             key={index}
-            className="text-white text-lg font-bold mb-2"
-            onClick={() => setSelectedWeek(weekObject.weekName)}
+            className='text-white text-lg font-bold mb-2'
+            onClick={() => setSelectedWeek(week.weekName)}
           >
-            {weekObject.weekName}
-            {selectedWeek === weekObject.weekName && (
+            {week.weekName}
+            {selectedWeek === week.weekName && (
               <ul>
-                {weekObject.labs.map((lab) => (
+                {week.labs.map((lab) => (
                   <LabItem
+                    key={lab}
                     labName={lab}
-                    onDelete={() => onDelete(weekObject.weekName, lab)}
-                    onGradeLab={() => onGradeLab(weekObject.weekName, lab)}
+                    onDelete={() => onDelete(week.weekName, lab)}
+                    onGradeLab={() => onGradeLab(week.weekName, lab)}
                   />
                 ))}
               </ul>

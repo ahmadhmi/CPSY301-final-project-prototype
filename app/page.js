@@ -1,14 +1,14 @@
 "use client";
 
-import Image from "next/image";
 import SideBar from "./components/SideBar";
 import MainPage from "./components/MainPage";
 import { useState } from "react";
 import Lab from "./components/Lab";
 import { useUserAuth } from "./_utils/auth-context";
+import blockData from "./Data/blocks";
 
 export default function Home() {
-  const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
+  const { user, gitHubSignIn } = useUserAuth();
   console.log(user);
 
   const handleSignIn = async () => {
@@ -19,61 +19,8 @@ export default function Home() {
     }
   };
 
-  const handleSignOut = async () => {
-    try {
-      await firebaseSignOut();
-    } catch (error) {
-      console.error("Error signing out", error);
-    }
-  };
 
-  const [data, setData] = useState([
-    {
-      blockName: "Block-1",
-      listOfWeeks: [
-        { weekName: "Week-1", labs: ["lab 1", "lab 2"] },
-        { weekName: "Week-2", labs: ["lab 3", "lab 4"] },
-        { weekName: "Week-3", labs: ["lab 5", "lab 6"] },
-      ],
-      students: [
-        "Ahmad Heshmati",
-        "Syed Jawad Raza",
-        "John Dao",
-        "Yuta Bokuchi",
-        "Qiaomu Lei",
-      ],
-    },
-    {
-      blockName: "Block-2",
-      listOfWeeks: [
-        { weekName: "Week-1", labs: ["lab 1", "lab 2"] },
-        { weekName: "Week-2", labs: ["lab 3", "lab 4"] },
-        { weekName: "Week-3", labs: ["lab 5", "lab 6"] },
-      ],
-      students: [
-        "Ahmad Heshmati",
-        "Syed Jawad Raza",
-        "John Dao",
-        "Yuta Bokuchi",
-        "Qiaomu Lei",
-      ],
-    },
-    {
-      blockName: "Block-3",
-      listOfWeeks: [
-        { weekName: "Week-5", labs: ["lab 1", "lab 2"] },
-        { weekName: "Week-6", labs: ["lab 3", "lab 4"] },
-        { weekName: "Week-7", labs: ["lab 5", "lab 6"] },
-      ],
-      students: [
-        "Ahmad Heshmati",
-        "Syed Jawad Raza",
-        "John Dao",
-        "Yuta Bokuchi",
-        "Qiaomu Lei",
-      ],
-    },
-  ]);
+  const [data, setData] = useState(blockData);
 
   const [selectedBlock, setSelectedBlock] = useState("Block-1");
 
@@ -91,8 +38,8 @@ export default function Home() {
     const selectedBlockData = data.find(
       (block) => block.blockName === blockName
     );
-    console.log(selectedBlockData);
     setListOfWeeks(selectedBlockData.listOfWeeks);
+    setShowLab(false);
   };
 
   const handleUpdateStudent = (blockName) => {
@@ -141,13 +88,16 @@ export default function Home() {
               />
             )}
             {showLab && (
-              <Lab studentList={selectedStudent} labName={selectedLab} />
+              <Lab studentList={selectedStudent} labName={selectedLab} blockName={selectedBlock} />
             )}
           </div>
-          <button className="bg-zinc-600 border-blue-800 rounded-lg" onClick={handleSignOut}>Sign Out</button>
         </div>
       ) : (
-        <button className="bg-black" onClick={handleSignIn}>Log In</button>
+        <div className="flex flex-col items-center mt-60">
+          <button className="bg-blue-500 w-52 h-20 border-blue-800 rounded-lg text-xl font-bold" onClick={handleSignIn}>
+            Log In
+          </button>
+        </div>
       )}
     </main>
   );
