@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 const Lab = ({ studentList, labName }) => {
   const [studentForGrade, setStudentForGrade] = useState(studentList);
@@ -14,7 +15,7 @@ const Lab = ({ studentList, labName }) => {
   ];
 
   const grade = {
-    drugSelected: "select the grade",
+    drugSelected: "",
     patientProfile: "",
     prescriber: "",
     sig: "",
@@ -23,27 +24,23 @@ const Lab = ({ studentList, labName }) => {
     daysSupply: "",
   };
 
-  const [studentName, setStudentName] = useState("");
+  const { register, handleSubmit } = useForm();
+
+  const [studentName, setStudentName] = useState(studentForGrade[0]);
   const [rx, setRx] = useState("");
   const [drugName, setDrugName] = useState("");
   const [grades, setGrades] = useState(grade);
   const [labResult, setLabResult] = useState([]);
   const [showResult, setShowResult] = useState(false);
 
-  const handFormSubmit = (e) => {
-    e.preventDefault();
-    const grade = {
-      studentName,
-      rx,
-      drugName,
-      grades,
-    };
-    setLabResult((previousLabResult) => [...previousLabResult, grade]);
+  const handFormSubmit = (Data) => {
+    const grade = Data;
     console.log(grade);
+    setLabResult((previousLabResult) => [...previousLabResult, grade]);
     setStudentForGrade(
       studentForGrade.filter((student) => student !== studentName)
     );
-    setStudentName("");
+    setStudentName(studentForGrade[0]);
     setRx("");
     setDrugName("");
     setGrades(grade);
@@ -55,7 +52,7 @@ const Lab = ({ studentList, labName }) => {
   return (
     <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
       <form
-        onSubmit={handFormSubmit}
+        onSubmit={handleSubmit(handFormSubmit)}
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
       >
         <div className="flex flex-col items-center">
@@ -74,8 +71,7 @@ const Lab = ({ studentList, labName }) => {
           <select
             id="name"
             className=" bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            value={studentName}
-            onChange={(e) => setStudentName(e.target.value)}
+            {...register("name")}
             required
           >
             <option disabled>Select the student</option>
@@ -98,8 +94,7 @@ const Lab = ({ studentList, labName }) => {
             id="Rx#"
             type="text"
             placeholder="Enter the Rx#"
-            value={rx}
-            onChange={(e) => setRx(e.target.value)}
+            {...register("Rx#")}
             required
           />
         </div>
@@ -115,8 +110,7 @@ const Lab = ({ studentList, labName }) => {
             id="DrugName"
             type="text"
             placeholder="Enter the Drug Name"
-            value={drugName}
-            onChange={(e) => setDrugName(e.target.value)}
+            {...register("DrugName")}
             required
           />
         </div>
@@ -130,17 +124,12 @@ const Lab = ({ studentList, labName }) => {
                 {criterion}
               </label>
               <select
+                id={criterion}
                 className=" bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                value={grades[criterion]}
-                onChange={(e) =>
-                  setGrades((previousGrades) => ({
-                    ...previousGrades,
-                    [criterion]: e.target.value,
-                  }))
-                }
+                {...register(criterion)}
                 required
               >
-                <option value="Select the grade" disabled selected>
+                <option value="" disabled selected>
                   Select the grade
                 </option>
                 <option value="pass">Pass</option>
@@ -158,6 +147,7 @@ const Lab = ({ studentList, labName }) => {
           </button>
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="button"
             href="#"
             onClick={handleShowResult}
             disabled={studentForGrade.length > 0}
@@ -175,15 +165,15 @@ const Lab = ({ studentList, labName }) => {
             {labResult.map((grade) => (
               <div className="flex flex-row gap-2 items-center text-slate-950">
                 <div className="w-1/6">{grade.studentName}</div>
-                <div className="w-1/6">{grade.rx}</div>
-                <div className="w-1/6">{grade.drugName}</div>
-                <div className="w-1/6">{grade.grades.drugSelected}</div>
-                <div className="w-1/6">{grade.grades.patientProfile}</div>
-                <div className="w-1/6">{grade.grades.prescriber}</div>
-                <div className="w-1/6">{grade.grades.sig}</div>
-                <div className="w-1/6">{grade.grades.dispenseQuantity}</div>
-                <div className="w-1/6">{grade.grades.repeats}</div>
-                <div className="w-1/6">{grade.grades.daysSupply}</div>
+                <div className="w-1/6">{rx}</div>
+                <div className="w-1/6">{drugName}</div>
+                <div className="w-1/6">{grades.drugSelected}</div>
+                <div className="w-1/6">{grades.patientProfile}</div>
+                <div className="w-1/6">{grades.prescriber}</div>
+                <div className="w-1/6">{grades.sig}</div>
+                <div className="w-1/6">{grades.dispenseQuantity}</div>
+                <div className="w-1/6">{grades.repeats}</div>
+                <div className="w-1/6">{grades.daysSupply}</div>
               </div>
             ))}
           </div>

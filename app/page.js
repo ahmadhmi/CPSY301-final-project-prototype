@@ -5,8 +5,28 @@ import SideBar from "./components/SideBar";
 import MainPage from "./components/MainPage";
 import { useState } from "react";
 import Lab from "./components/Lab";
+import { useUserAuth } from "./_utils/auth-context";
 
 export default function Home() {
+  const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
+  console.log(user);
+
+  const handleSignIn = async () => {
+    try {
+      await gitHubSignIn();
+    } catch (error) {
+      console.error("Error signing in", error);
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await firebaseSignOut();
+    } catch (error) {
+      console.error("Error signing out", error);
+    }
+  };
+
   const [data, setData] = useState([
     {
       blockName: "Block-1",
@@ -103,23 +123,32 @@ export default function Home() {
   };
 
   return (
-    <main className="flex h-screen w-screen">
-      <div className="w-1/6 h-full ">
-        <SideBar
-          handleBlockClick={handleBlockClicked}
-          listOfBlocks={data.map((object) => object.blockName)}
-        />
-      </div>
-      <div className="w-5/6">
-        {!showLab &&
-          <MainPage
-            onGradeLab={onGradeLab}
-            listOfWeeks={listOfWeeks}
-            onDelete={onDeleteLab}
-          />
-        }
-        {showLab && <Lab studentList={selectedStudent} labName={selectedLab} />}
-      </div>
+    <main>
+      {user ? (
+        <div className="flex h-screen w-screen">
+          <div className="w-1/6 h-full ">
+            <SideBar
+              handleBlockClick={handleBlockClicked}
+              listOfBlocks={data.map((object) => object.blockName)}
+            />
+          </div>
+          <div className="w-5/6">
+            {!showLab && (
+              <MainPage
+                onGradeLab={onGradeLab}
+                listOfWeeks={listOfWeeks}
+                onDelete={onDeleteLab}
+              />
+            )}
+            {showLab && (
+              <Lab studentList={selectedStudent} labName={selectedLab} />
+            )}
+          </div>
+          <button className="bg-zinc-600 border-blue-800 rounded-lg" onClick={handleSignOut}>Sign Out</button>
+        </div>
+      ) : (
+        <button className="bg-black" onClick={handleSignIn}>Log In</button>
+      )}
     </main>
   );
 }
