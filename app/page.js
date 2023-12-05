@@ -5,7 +5,7 @@ import MainPage from "./components/MainPage";
 import { useState } from "react";
 import Lab from "./components/Lab";
 import { useUserAuth } from "./_utils/auth-context";
-import blockData from "./Data/blocks.json";
+import blockData from "./Data/Blocks";
 
 export default function Home() {
   const { user, gitHubSignIn } = useUserAuth();
@@ -18,7 +18,6 @@ export default function Home() {
       console.error("Error signing in", error);
     }
   };
-
 
   const [data, setData] = useState(blockData);
 
@@ -88,13 +87,20 @@ export default function Home() {
               />
             )}
             {showLab && (
-              <Lab studentList={selectedStudent} labName={selectedLab} blockName={selectedBlock} />
+              <Lab
+                studentList={selectedStudent}
+                labName={selectedLab}
+                blockName={selectedBlock}
+              />
             )}
           </div>
         </div>
       ) : (
         <div className="flex flex-col items-center mt-60">
-          <button className="bg-blue-500 w-52 h-20 border-blue-800 rounded-lg text-xl font-bold" onClick={handleSignIn}>
+          <button
+            className="bg-blue-500 w-52 h-20 border-blue-800 rounded-lg text-xl font-bold"
+            onClick={handleSignIn}
+          >
             Log In
           </button>
         </div>
